@@ -28,8 +28,8 @@
 git clone https://github.com/[あなたのユーザー名]/docugen-ai.git
 cd docugen-ai
 python -m venv venv
-# Windowsの場合: .\venv\Scripts\activate
-# Mac / Linuxの場合: source venv/bin/activate
+- Windowsの場合: .\venv\Scripts\activate
+- Mac / Linuxの場合: source venv/bin/activate
 pip install -r requirements.txt
 
 ### 2. 環境変数の設定
