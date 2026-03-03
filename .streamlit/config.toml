@@ -1,0 +1,15 @@
+[theme]
+# アプリのメインカラー（ボタンや選択時の色：鮮やかな黄緑）
+primaryColor = "#9CCC65"
+
+# 全体の背景色（清潔感のある白）
+backgroundColor = "#FFFFFF"
+
+# サイドバーや入力ボックスの背景色（優しい薄緑）
+secondaryBackgroundColor = "#F1F8E9"
+
+# テキストの色（読みやすい濃いグレー）
+textColor = "#263238"
+
+# フォントの設定（システム標準）
+font = "sans serif"
