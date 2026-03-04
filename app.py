@@ -7,13 +7,22 @@ from io import BytesIO
 
 # --- 1. 環境構築と設定 ---
 load_dotenv()
-api_key = os.getenv("GEMINI_API_KEY")
+
+# サイドバーにAPIキー入力欄を設置（type="password"で伏せ字にします）
+st.sidebar.title("🔑 API設定")
+user_api_key = st.sidebar.text_input(
+    "Gemini API Keyを入力してください",
+    type="password",
+    help="Google AI Studioで取得したAPIキーを入力してください。このキーは保存されず、このセッションでのみ使用されます。"
+)
+
+# キーの優先順位：1.画面からの入力 2.ローカルの.env（開発用）
+api_key = user_api_key if user_api_key else os.getenv("GEMINI_API_KEY")
 
 if api_key:
     genai.configure(api_key=api_key)
 else:
-    st.error("⚠️ APIキーが見つかりません。'.env'ファイルの設定を確認してください。")
-
+    st.sidebar.warning("⚠️ APIキーを入力してください。")
 # ページ基本設定
 st.set_page_config(
     page_title="DocuGen AI | 文章作成アシスタント",
@@ -119,7 +128,9 @@ elif doc_type == "設計書":
 # --- 5. 生成実行と表示 ---
 st.divider()
 if st.button(f"✨ {doc_type}を生成する", type="primary", key="generate_button", use_container_width=True):
-    if not all([val1, val2, val3, val4]):
+    if not api_key:
+        st.error("❌ APIキーが設定されていません。サイドバーから入力してください。")
+    elif not all([val1, val2, val3, val4]):
         st.warning("⚠️ すべての項目を入力してください。")
     else:
         with st.spinner("AIが構成を練っています..."):
